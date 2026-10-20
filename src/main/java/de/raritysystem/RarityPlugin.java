@@ -35,7 +35,7 @@ import java.util.*;
  */
 public final class RarityPlugin extends JavaPlugin implements Listener {
 
-    private record Rarity(String id, Component line, List<String> patterns) {}
+    private record Rarity(String id, Component line, List<String> patterns, boolean glint) {}
 
     private final MiniMessage mm = MiniMessage.miniMessage();
     private final List<Rarity> rarities = new ArrayList<>(); // niedrig -> hoch
@@ -64,12 +64,13 @@ public final class RarityPlugin extends JavaPlugin implements Listener {
                 String display = sec.getString(id + ".display", id);
                 Component line = mm.deserialize(format, Placeholder.parsed("rarity", display))
                         .decoration(TextDecoration.ITALIC, false);
-                rarities.add(new Rarity(id, line, sec.getStringList(id + ".materials")));
+                rarities.add(new Rarity(id, line, sec.getStringList(id + ".materials"),
+                        sec.getBoolean(id + ".glint", false)));
             }
         }
         if (rarities.isEmpty()) {
             rarities.add(new Rarity("common",
-                    mm.deserialize("<white>COMMON").decoration(TextDecoration.ITALIC, false), List.of()));
+                    mm.deserialize("<white>COMMON").decoration(TextDecoration.ITALIC, false), List.of(), false));
         }
         String def = getConfig().getString("default-rarity", rarities.get(0).id());
         defaultRarity = rarities.stream().filter(r -> r.id().equalsIgnoreCase(def)).findFirst()
@@ -109,6 +110,8 @@ public final class RarityPlugin extends JavaPlugin implements Listener {
         if (mark != null && !lore.isEmpty()) lore.removeLast(); // alte Seltenheitszeile entfernen
         lore.add(r.line());
         meta.lore(lore);
+        if (r.glint()) meta.setEnchantmentGlintOverride(true);      // schimmert wie verzaubert
+        else if (mark != null) meta.setEnchantmentGlintOverride(null); // Zustand zurücksetzen
         pdc.set(key, PersistentDataType.STRING, r.id());
         item.setItemMeta(meta);
         return true;
