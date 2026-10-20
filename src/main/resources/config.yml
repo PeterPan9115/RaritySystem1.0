@@ -1,33 +1,192 @@
 # Format der Zeile im Tooltip (MiniMessage). <rarity> wird durch den display-Text ersetzt.
 line-format: "<dark_gray>Seltenheit: <rarity>"
 
-# glint: true = Item schimmert (Verzauberungs-Glanz, auch in der Hand sichtbar).
-# Reihenfolge = von niedrig nach hoch. Bei Treffern in mehreren Stufen gewinnt die höhere.
-# materials: exakter Name, "PRÄFIX_*" oder "*_SUFFIX". Alles ohne Treffer = default-rarity.
+# Animation: Farbverlauf "wandert" waehrend eine Kiste/GUI offen ist (Phase = %phase%).
+# Im normalen Spieler-Inventar (E) ist der Verlauf statisch, Minecraft meldet dem Server dort kein "Oeffnen".
+animation:
+  enabled: true
+  interval-ticks: 3     # alle 3 Ticks aktualisieren (20 Ticks = 1 Sekunde)
+  speed: 0.15           # Geschwindigkeit der Welle
+
+# default-rarity: Alles ohne Treffer bekommt diese Stufe.
 default-rarity: common
 
+# Reihenfolge = von niedrig nach hoch. Bei Treffern in mehreren Stufen gewinnt die hoehere.
+# materials: exakter Name, "PRAEFIX_*" oder "*_SUFFIX".
+# glint: true = Item schimmert wie verzaubert (auch in der Hand sichtbar).
+# animated: true = Farbverlauf der Schrift bewegt sich (display muss %phase% enthalten).
 rarities:
+
   common:
-    display: "<white><bold>COMMON"
+    display: "<bold><gradient:#9e9e9e:#ffffff>COMMON"
+
   uncommon:
-    display: "<green><bold>UNCOMMON"
-    materials: [IRON_*, GOLDEN_*, CHAINMAIL_*, COPPER_INGOT, GOLD_INGOT, LAPIS_LAZULI, REDSTONE, QUARTZ]
+    display: "<bold><gradient:#55ff55:#00aa77>UNCOMMON"
+    materials:
+      - "*_SWORD"
+      - "*_PICKAXE"
+      - "*_AXE"
+      - "*_SHOVEL"
+      - "*_HOE"
+      - "*_HELMET"
+      - "*_CHESTPLATE"
+      - "*_LEGGINGS"
+      - "*_BOOTS"
+      - BOW
+      - CROSSBOW
+      - SHIELD
+      - FISHING_ROD
+      - COAL
+      - CHARCOAL
+      - COPPER_INGOT
+      - RAW_IRON
+      - RAW_COPPER
+      - RAW_GOLD
+      - IRON_NUGGET
+      - GOLD_NUGGET
+      - BREAD
+      - COOKED_BEEF
+      - COOKED_PORKCHOP
+      - GOLDEN_CARROT
+      - TNT
+      - COMPASS
+      - CLOCK
+      - BUCKET
+      - SHEARS
+
   rare:
-    display: "<blue><bold>RARE"
-    materials: [DIAMOND, DIAMOND_*, EMERALD, EMERALD_BLOCK, ENDER_PEARL, EXPERIENCE_BOTTLE, ENCHANTED_BOOK, BLAZE_ROD, SHULKER_SHELL, GHAST_TEAR]
+    display: "<bold><gradient:#4d94ff:#00e5ff>RARE"
+    materials:
+      - "IRON_*"
+      - "GOLDEN_*"
+      - "CHAINMAIL_*"
+      - GOLD_INGOT
+      - REDSTONE
+      - LAPIS_LAZULI
+      - QUARTZ
+      - AMETHYST_SHARD
+      - ENDER_PEARL
+      - BLAZE_ROD
+      - GLOWSTONE_DUST
+      - SLIME_BALL
+      - PRISMARINE_SHARD
+      - NAUTILUS_SHELL
+      - SADDLE
+      - NAME_TAG
+      - SPYGLASS
+      - PISTON
+      - STICKY_PISTON
+      - OBSERVER
+      - HOPPER
+      - ENCHANTING_TABLE
+      - "MUSIC_DISC_*"
+      - GOLDEN_APPLE
+
   epic:
     glint: true
-    display: "<dark_purple><bold>EPIC"
-    materials: [ENDER_EYE, ELYTRA, TOTEM_OF_UNDYING, TRIDENT, HEART_OF_THE_SEA, "*_SMITHING_TEMPLATE", SHULKER_BOX, "*_SHULKER_BOX", WITHER_SKELETON_SKULL]
+    animated: true
+    display: "<bold><gradient:#aa55ff:#ff55ff:#7a3cff:%phase%>EPIC"
+    materials:
+      - DIAMOND
+      - "DIAMOND_*"
+      - EMERALD
+      - EMERALD_BLOCK
+      - ENDER_EYE
+      - EXPERIENCE_BOTTLE
+      - ENCHANTED_BOOK
+      - GHAST_TEAR
+      - SHULKER_SHELL
+      - TURTLE_HELMET
+      - TURTLE_SCUTE
+      - CRYING_OBSIDIAN
+      - ANCIENT_DEBRIS
+      - LODESTONE
+      - SPONGE
+      - WITHER_ROSE
+      - "*_SMITHING_TEMPLATE"
+      - TRIDENT
+      - CROSSBOW
+
   legendary:
     glint: true
-    display: "<gold><bold>LEGENDARY"
-    materials: [NETHERITE_*, ENCHANTED_GOLDEN_APPLE, NETHER_STAR, BEACON, CONDUIT, MACE]
+    animated: true
+    display: "<bold><gradient:#ff9900:#fff27a:#ff6600:%phase%>LEGENDARY"
+    materials:
+      - ENCHANTED_GOLDEN_APPLE
+      - TOTEM_OF_UNDYING
+      - ELYTRA
+      - HEART_OF_THE_SEA
+      - NETHERITE_SCRAP
+      - WITHER_SKELETON_SKULL
+      - SHULKER_BOX
+      - "*_SHULKER_BOX"
+      - ECHO_SHARD
+      - RECOVERY_COMPASS
+      - SNIFFER_EGG
+      - OMINOUS_TRIAL_KEY
+      - HEAVY_CORE
+      - DIAMOND_BLOCK
+
   mythic:
     glint: true
-    display: "<light_purple><bold>MYTHIC"
-    materials: [DRAGON_HEAD, DRAGON_EGG, END_CRYSTAL, TNT_MINECART]
+    animated: true
+    display: "<bold><gradient:#ff4da6:#9d00ff:#4dffff:%phase%>MYTHIC"
+    materials:
+      - NETHERITE_INGOT
+      - NETHERITE_SWORD
+      - NETHERITE_PICKAXE
+      - NETHERITE_AXE
+      - NETHERITE_SHOVEL
+      - NETHERITE_HOE
+      - NETHERITE_HELMET
+      - NETHERITE_CHESTPLATE
+      - NETHERITE_LEGGINGS
+      - NETHERITE_BOOTS
+      - NETHERITE_HORSE_ARMOR
+      - NETHER_STAR
+      - CONDUIT
+      - MACE
+
   divine:
     glint: true
-    display: "<gradient:#ff5555:#ffaa00><bold>DIVINE"
-    materials: [BEDROCK, COMMAND_BLOCK, "*_COMMAND_BLOCK", STRUCTURE_BLOCK, JIGSAW, BARRIER, DEBUG_STICK, SPAWNER, "*_SPAWN_EGG"]
+    animated: true
+    display: "<bold><gradient:#ff3b3b:#ffb300:#fff566:#ff3b3b:%phase%>DIVINE"
+    materials:
+      - DRAGON_EGG
+      - DRAGON_HEAD
+      - BEACON
+      - NETHERITE_BLOCK
+      - END_CRYSTAL
+
+  celestial:
+    glint: true
+    animated: true
+    display: "<bold><gradient:#55ffff:#ffffff:#5577ff:%phase%>CELESTIAL"
+    materials:
+      - DEBUG_STICK
+      - KNOWLEDGE_BOOK
+      - SPAWNER
+      - TRIAL_SPAWNER
+      - VAULT
+      - "*_SPAWN_EGG"
+
+  cosmic:
+    glint: true
+    animated: true
+    display: "<bold><gradient:#ff0000:#ffff00:#00ff00:#00ffff:#ff00ff:#ff0000:%phase%>COSMIC"
+    materials:
+      - COMMAND_BLOCK
+      - "*_COMMAND_BLOCK"
+      - STRUCTURE_BLOCK
+      - JIGSAW
+
+  eternal:
+    glint: true
+    animated: true
+    display: "<bold><gradient:#ff2d2d:#ffffff:#2dd4ff:#ffffff:%phase%>ETERNAL"
+    materials:
+      - BEDROCK
+      - BARRIER
+      - LIGHT
+      - STRUCTURE_VOID
+      - END_PORTAL_FRAME
