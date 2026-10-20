@@ -1,0 +1,28 @@
+# Format der Zeile im Tooltip (MiniMessage). <rarity> wird durch den display-Text ersetzt.
+line-format: "<dark_gray>Seltenheit: <rarity>"
+
+# Reihenfolge = von niedrig nach hoch. Bei Treffern in mehreren Stufen gewinnt die höhere.
+# materials: exakter Name, "PRÄFIX_*" oder "*_SUFFIX". Alles ohne Treffer = default-rarity.
+default-rarity: common
+
+rarities:
+  common:
+    display: "<white><bold>COMMON"
+  uncommon:
+    display: "<green><bold>UNCOMMON"
+    materials: [IRON_*, GOLDEN_*, CHAINMAIL_*, COPPER_INGOT, GOLD_INGOT, LAPIS_LAZULI, REDSTONE, QUARTZ]
+  rare:
+    display: "<blue><bold>RARE"
+    materials: [DIAMOND, DIAMOND_*, EMERALD, EMERALD_BLOCK, ENDER_PEARL, EXPERIENCE_BOTTLE, ENCHANTED_BOOK, BLAZE_ROD, SHULKER_SHELL, GHAST_TEAR]
+  epic:
+    display: "<dark_purple><bold>EPIC"
+    materials: [ENDER_EYE, ELYTRA, TOTEM_OF_UNDYING, TRIDENT, HEART_OF_THE_SEA, "*_SMITHING_TEMPLATE", SHULKER_BOX, "*_SHULKER_BOX", WITHER_SKELETON_SKULL]
+  legendary:
+    display: "<gold><bold>LEGENDARY"
+    materials: [NETHERITE_*, ENCHANTED_GOLDEN_APPLE, NETHER_STAR, BEACON, CONDUIT, MACE]
+  mythic:
+    display: "<light_purple><bold>MYTHIC"
+    materials: [DRAGON_HEAD, DRAGON_EGG, END_CRYSTAL, TNT_MINECART]
+  divine:
+    display: "<gradient:#ff5555:#ffaa00><bold>DIVINE"
+    materials: [BEDROCK, COMMAND_BLOCK, "*_COMMAND_BLOCK", STRUCTURE_BLOCK, JIGSAW, BARRIER, DEBUG_STICK, SPAWNER, "*_SPAWN_EGG"]

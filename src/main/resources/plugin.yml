@@ -1,0 +1,12 @@
+name: RaritySystem
+version: 1.0.0
+main: de.raritysystem.RarityPlugin
+api-version: "26.1"
+description: Gibt jedem Item eine Seltenheit, sichtbar im Inventar-Tooltip
+commands:
+  rarity:
+    description: Lädt die Seltenheiten neu
+    usage: /rarity reload
+permissions:
+  raritysystem.admin:
+    default: op
